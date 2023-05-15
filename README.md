@@ -94,11 +94,12 @@ data$inflorescence_position<-data$inflorescence_total-data$inflorescence_close
 ggplot(data,aes(total_frame,inflorescence_total)) +geom_point(colour=data$cluster2,size=2)
 ggplot(data,aes(total_frame,inflorescence_position)) +geom_point(colour=data$cluster2,size=2)
 ```
-
-
+![infograph](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/c127bc16-827f-44dd-9ffd-65d0b5d146e6)
 
 
 ## Conclusion
+According to clustering method 2, it can be observed that the stigma of mazus miquelli may have significantly different movement patterns in different individuals, and this pattern has no obvious relationship with the total movement time or corolla length.
+From the analysis of the combination of inflorescence and movement characteristics, the total movement time of the inflorescence with less flowering (this is related to the plant microenvironment such as sunlight, water, insect pests, etc., and may also be related to genotype) is shorter. From the perspective of experimental improvement, flowering time and inflorescence growth time can be included in the records to obtain more convincing evidence on the ecological significance and adaptability of stigma behavior to plants.
 
 ## Reference
 1.Stigma Sensitivity and the Duration of Temporary Closure Are Affected by Pollinator Identity in Mazus miquelii (Phrymaceae), a Species with Bilobed Stigma. Front. Plant Sci., 10 May 2017 Sec. Plant Development and EvoDevo Volume 8 - 2017 | https://doi.org/10.3389/fpls.2017.00783
