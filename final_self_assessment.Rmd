@@ -1,6 +1,6 @@
 ---
 title: "PSY6422 final self-assessment"
-author: "Your Name Here"
+author: "Yitong Yang"
 date: "12/05/2023"
 output:
   html_document:
@@ -22,11 +22,16 @@ Note: I expect and hope that all students can get full marks for this assessment
 # Final Self-assessment for PSY6422
 
 ## 1. What aspects of the course (topics, learning methods) did you enjoy? What about the course helped your learning and are things we should do more of, or could be copied by other courses?
+This course encouraged me to use github for learning and display, and prompted me to have a deeper understanding of how to use data and display, and use R to help me understand many undiscovered features in a lot of data. This process requires patience but there is always surprise.
 
 ## 2. Which aspects of the course did you find least useful, least interesting or most difficult? Explain what hindered your learning and, if possible, name a specific thing which we could do to help.
+When I first came to the UK to study, I still have a lot of problems, such as language; I am looking forward to some more comprehensive content, such as bioinformatics or EEG, of course, the threshold and difficulty may be too high; other content such as water pollution , Air pollution investigation, there are many very interesting projects, I think this kind of project is easy to do, but if you put more effort into sample collection, cause analysis, and data processing, you can do it very well.
 
 ## 3. What topics do you want to learn more about in the future? Explain why
+In the future, I hope to use data analysis tools more deeply in combination with the content of Phd
 
 ## 4. Please share one thing you have read and enjoyed or found useful on the topic of data management and/or visualisation. Please include a full reference.
+Bioinformatics data has a huge amount of content, as long as you select a few content, such as a gene or a protein, it is enough to do it for a long time; I think it is good to start with the most basic, such as using ncbi blast more often. https://blast.ncbi.nlm.nih.gov/Blast.cgi
 
 ## 5. what advice would you give someone starting this course?
+My undergraduate is a biology major. This project reorganizes the graduation project, and has a better refinement and presentation on the original basis. My suggestion is that using data that you are familiar with or personally collected may have more motivation for in-depth analysis.
