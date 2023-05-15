@@ -45,30 +45,22 @@ head(data)
 library(ggplot2)
 ggplot(data, aes(total_frame, length.of.petal.0.1mm.))+ geom_point(color="gray",size=4)
 ```
-图片
-
-
+![ggplot_frame_length](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/667051fe-29be-456b-8638-c3adb3fec7c8)
 
 ```
 # the speed/proportion of each movement stage 
 data$begin<-data$onethird_movement/data$total_frame
 data$mid<-data$twothird_movement/data$total_frame
 data$end<-data$lastthird_movement/data$total_frame
-```
-
-```
 # clustering by total movement time and petal length (method 1)
 library(cluster)
 mcluster <- kmeans(data[,c(5,9)], center=3)
 clusplot(data, mcluster$cluster, color=T, shade=T, labels=0, lines=0)
 data$cluster1<-mcluster$cluster
+ggplot(data,aes(total_frame,length.of.petal.0.1mm., group=cluster1,colour = cluster1)) +geom_point(colour=data$cluster1,size=3)
 ```
-图片
-
-```
-ggplot(data,aes(total_frame,length.of.petal.0.1mm., group=cluster1,colour = cluster1)) +geom_point(colour=data$cluster1,size=1)+geom_smooth(method = "loess", se = FALSE)
-```
-图片
+![cluster1](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/d3087bb4-8886-4ad4-8ae7-3199f8a563d2)
+![ggplotcolor](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/f1d031ca-a8fd-4f08-995b-994f3716bf5e)
 
 ```
 # clustering by each movement stage (method 2)
@@ -76,22 +68,33 @@ mcluster2 <- kmeans(data[,10:12], center=3)
 clusplot(data, mcluster2$cluster, color=T, shade=T, labels=0, lines=0)
 data$cluster2<-mcluster2$cluster
 ```
+![cluster2](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/a15a02bc-9518-4186-9b8f-b66f8f62404e)
 
 ```
-ggplot(data,aes(total_frame,cluster2, group=cluster1,colour = cluster1)) +geom_point(colour=data$cluster2,size=1)+geom_smooth(method = "loess", se = FALSE)
+ggplot(data,aes(total_frame,cluster2, group=cluster1,colour = cluster1)) +geom_point(colour=data$cluster2,size=3)
+ggplot(data,aes(length.of.petal.0.1mm.,cluster2, group=cluster1,colour = cluster1)) +geom_point(colour=data$cluster2,size=3)
 ```
+![lengthcluster2](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/e26a7d1e-f74e-42f5-9c6a-8602ab8383aa)
+![framecluster2](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/9f717f1a-a19b-4c4c-88cb-116ac01632b4)
 
+### Graph by movement type (method 2)
 ```
-ggplot(data,aes(total_frame,cluster2)) +geom_point(colour=data$cluster2,size=1,alpha=0.3)
+ggplot(data,aes(onethird_movement,twothird_movement, group=cluster2,colour = cluster2)) +geom_point(colour=data$cluster1,size=2)+geom_smooth(method = "loess",se = FALSE)
+ggplot(data,aes(onethird_movement,lastthird_movement, group=cluster2,colour = cluster2)) +geom_point(colour=data$cluster2,size=2)+geom_smooth(method = "loess",se = FALSE)
 ```
+![两类方法作图，点颜色花冠总时间，线颜色运动特征](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/e531155a-4232-4f1e-bc55-2ad4884b9c3a)
+![两类方法作图3](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/a8f9d6ed-3927-4470-97af-9ed3b5b187e8)
 
+
+
+### analysis with inflorescence
 ```
-#analysis with inflorescence
 data$inflorescence_total<-data$inflorescence_close+data$inflorescence_open+data$inflorescence_shedding
 data$inflorescence_position<-data$inflorescence_total-data$inflorescence_close
 ggplot(data,aes(total_frame,inflorescence_total)) +geom_point(colour=data$cluster2,size=2)
 ggplot(data,aes(total_frame,inflorescence_position)) +geom_point(colour=data$cluster2,size=2)
 ```
+
 
 
 
