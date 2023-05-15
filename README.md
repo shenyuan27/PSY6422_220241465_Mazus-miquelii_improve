@@ -1,6 +1,11 @@
-<table><tr><td bgcolor=#FF4500>
-# PSY6422 Yitong Yang the movement of Mazus miquelii stigma under mechanic force
 
+# The movement of Mazus miquelii stigma under mechanic force
+# PSY6422 Yitong Yang 
+[Background and research questions](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/edit/main/README.md#background-and-research-questions)
+[Experiment and Data collection](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/edit/main/README.md#experiment-and-data-collection)
+[Data visualization](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/edit/main/README.md#data-visualization)
+[Conclusion](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/edit/main/README.md#conclusion)
+[Reference](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/edit/main/README.md#conclusion)
 ## Background and research questions
 Mazus miquelii is a species of herbaceous perennial groundcover native to Japan and China.It spreads rapidly by producing significant amounts of slender stolons which root at the nodes. The leaves are undivided and teethed along the margins. The blue or purple flowers are bilateral and have 5 petals，which emerge during the months of June to August. This species is hermaphroditic and is pollinated by insects.
 Interestingly, its bilobed stigma will close under mechanic force made by pollinator and may reopen after a visit. Behavior of a sensitive stigma reflects a special relationship between plants and animals by way of pollination.
