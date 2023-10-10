@@ -1,16 +1,8 @@
 
 # The movement of Mazus miquelii stigma under mechanic force
 ## PSY6422 220241465
-[Background and research questions](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/blob/main/README.md#background-and-research-questions)
 
-[Experiment and Data collection](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/blob/main/README.md#experiment-and-data-collection)
-
-[Data visualization](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/blob/main/README.md#data-visualization)
-
-[Conclusion](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/blob/main/README.md#conclusion)
-
-[Reference](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/blob/main/README.md#reference)
-## 1
+## 1.Project introduction
 
 ## 1.1Background and research questions
 Mazus miquelii is a species of herbaceous perennial groundcover native to Japan and China.It spreads rapidly by producing significant amounts of slender stolons which root at the nodes. The leaves are undivided and teethed along the margins. The blue or purple flowers are bilateral and have 5 petals，which emerge during the months of June to August. This species is hermaphroditic and is pollinated by insects.
@@ -21,11 +13,15 @@ The behavior of touch-sensitive stigmas closing after being touched by pollinato
 
 
 ## 1.2Experiment and Data collection
+The data comes from my undergraduate thesis, and the data can be queried in the Wuhan University thesis database.（https://www.lib.whu.edu.cn/web/index.asp?obj_id=313）This is also part of a follow-up study to Reference 1.
 In this research, two wild populations were collected from Donghu Botanical Garden (30°31'N, 114°26'E, 70m) in Hongshan District, Wuhan City, Hubei Province in early March 2022, separated by more than 50m. Plants with good growth were selected for potted cultivation and numbered, with 26 pots in the A population and 14 pots in the B population. Placed in a laboratory in good sunlight, isolated from pollinators, watered every two days; used for observation of floral characteristics and stigma behavior.
 The closure of the touch sensitive stigma depends on the touch of the pollinator to a large extent. After the stigma is stimulated, it closes rapidly mainly by the movement of the lower lobes. The closure behavior of tactile stigmas has a certain correlation with pollination effectiveness. Only effective pollination can make stigmas close, but it cannot explain the reason why most stigmas close again. In order to compare the differences in stigma touch sensitivity between different populations, this study recorded the closing process of artificial mechanical touching of the stigma. On a sunny afternoon, plants were randomly selected to conduct in vitro experiments on open flowers from the bottom of the inflorescence. Dsam body tone was used for observation and recording (29.96 frames per second), and the center of the lower lobe edge was manually touched with tweezers. In subsequent analysis, the displacement is calculated from the distance from the lower center edge of the lower lobe to the upper center edge of the upper lobe. All stigmas will be observed for pollen falling before measurement, and only stigmas without pollen falling will be selected for measurement.
 dataset_mazus.csv contains sample name, the time of movement(frames) totally and each stage,the inflorescence info, and the length of petal. 
 
 ![172620235142328101](https://github.com/shenyuan27/desktop-tutorial/assets/124840282/191161d9-4033-430d-a3a7-9472a355ab7c)
+
+1.3 How to display visualization results
+
 
 ## 2.Data visualization
 
