@@ -1,0 +1,21 @@
+---
+title: "Improvements"
+author: '220241465'
+date: "2023-10-10"
+output: html_document
+---
+Improve
+
+1. Supplemented data sources
+
+2. Added Rmarkdown on github
+
+3. Reorganized the title and added more explanations to help understand the project content.
+
+4. Added histogram to visualization
+
+5. Added three-dimensional scatter plot animation drawn by RGL
+
+6. Increased the contrast of the main chart and added a title to the drawing
+
+7. Use github.io for presentation
