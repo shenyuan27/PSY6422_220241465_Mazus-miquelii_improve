@@ -31,6 +31,16 @@ data <- read.csv(file="dataset_mazus.csv")
 head(data)
 ```
 
+```
+                 filename onethird_movement twothird_movement lastthird_movement total_frame inflorescence_close
+1 VID_20220405_144933.mp4               190               120                255         565                   1
+2 VID_20220405_145131.mp4                72                58                172         302                   1
+3 VID_20220405_145540.mp4                86                66                107         259                   2
+4 VID_20220405_145650.mp4                52                47                 97         196                   2
+5 VID_20220405_145937.mp4                73                64                123         260                   2
+6 VID_20220405_151235.mp4               131               103                245         479                   0
+```
+
 ```{r, fig.height = 8,fig.with = 6}
 library(ggplot2)
 
