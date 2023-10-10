@@ -20,34 +20,70 @@ dataset_mazus.csv contains sample name, the time of movement(frames) totally and
 
 ![172620235142328101](https://github.com/shenyuan27/desktop-tutorial/assets/124840282/191161d9-4033-430d-a3a7-9472a355ab7c)
 
-# 1.3 How to display visualization results
+
+## 2 Data visualization
+
+### 2.1 Overview: Histogram shows the corolla length, inflorescence position and stigma closure time of the samples
 
 
-## 2.Data visualization
-
-#
-
-```
+```{r, fig.height = 8,fig.with = 6}
 data <- read.csv(file="dataset_mazus.csv")
 head(data)
 ```
-```
-                 filename onethird_movement twothird_movement lastthird_movement total_frame inflorescence_close
-1 VID_20220405_144933.mp4               190               120                255         565                   1
-2 VID_20220405_145131.mp4                72                58                172         302                   1
-3 VID_20220405_145540.mp4                86                66                107         259                   2
-4 VID_20220405_145650.mp4                52                47                 97         196                   2
-5 VID_20220405_145937.mp4                73                64                123         260                   2
-6 VID_20220405_151235.mp4               131               103                245         479                   0
-```
 
-```
+```{r, fig.height = 8,fig.with = 6}
 library(ggplot2)
-ggplot(data, aes(total_frame, length.of.petal.0.1mm.))+ geom_point(color="gray",size=4)
-```
-![ggplot_frame_length](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/667051fe-29be-456b-8638-c3adb3fec7c8)
+
+data$inflorescence_total<-data$inflorescence_close+data$inflorescence_open+data$inflorescence_shedding
+data$inflorescence_position<-data$inflorescence_total-data$inflorescence_close
+data$inflorescence_position_p<-data$inflorescence_position/data$inflorescence_total
+
+ggplot(data, aes(x=total_frame)) +
+    geom_histogram(binwidth = 50, fill = "lightblue", color = "black") +
+    labs(title = "Histogram of stigma closing time (number of frames)", x = "Frequency", y = "Value") +
+    xlim(0, 750)
+
+ggplot(data, aes(x=length.of.petal.0.1mm.)) +
+    geom_histogram(binwidth = 10, fill = "lightblue", color = "black") +
+    labs(title = "Histogram of petal widths", x = "Frequency", y = "Value") +
+    xlim(0, 200)
+
+ggplot(data, aes(x=inflorescence_position)) +
+    geom_histogram(binwidth = 1, fill = "lightblue", color = "black") +
+    labs(title = "Histogram of inflorescence position", x = "Frequency", y = "Value") +
+    xlim(0, 20)
 
 ```
+![(M)NAXQ )G@K8W0`85U6Z3X](https://github.com/shenyuan27/PSY6422_220241465_Mazus-miquelii_improve/assets/124840282/bc089d60-a88b-445a-9b22-f9455da5e1cc)
+
+![6`%TOSCQFD VPS@`AS~Y}I](https://github.com/shenyuan27/PSY6422_220241465_Mazus-miquelii_improve/assets/124840282/fecb3cd9-af44-4789-aa0a-6f76841e3da1)
+
+![8FW24(E0ONATU4FC@FYQ2XR](https://github.com/shenyuan27/PSY6422_220241465_Mazus-miquelii_improve/assets/124840282/115c06a3-4a9d-473d-af97-ac2ba2fecc60)
+
+
+Here, the three most important variables of each sample (that is, the stigma of each flower) in the experiment are displayed through a histogram: the time when the stigma closes, the position on the inflorescence, and the width of the petals. In nature, different pollinators may have different priorities for visiting flowers due to the shape of the petals or the position of the inflorescence (such as closer to the top).
+
+
+### 2.2 Correlation analysis between stigma closure time, corolla length and inflorescence position
+
+```{r, fig.height = 8,fig.with = 6}
+ggplot(data, aes(total_frame, length.of.petal.0.1mm.))+ geom_point(color="gray",size=4) +
+    labs(title = "Scatter plot of petal length and stigma closure time", x = "stigma closing time(frames)", y = "petal length")
+
+
+#ggplot(data, aes(inflorescence_position_p, length.of.petal.0.1mm.))+ geom_point(color="gray",size=4) +
+#    labs(title = "Scatter plot of petal length and inflorescence position", x = "inflorescence position", y = "petal length")
+
+ggplot(data, aes(inflorescence_position_p, total_frame))+ geom_point(color="gray",size=4) +
+    labs(title = "Scatter plot of petal length and inflorescence position", x = "inflorescence position", y = "stigma closing time(frames)")
+
+```
+![SYE3C F~@ K1K$B85T$L903](https://github.com/shenyuan27/PSY6422_220241465_Mazus-miquelii_improve/assets/124840282/eb53e871-ea7d-4ce6-ac69-47e4a025734a)
+
+![M }GMQ$9`MJZM`729G8)Q2C](https://github.com/shenyuan27/PSY6422_220241465_Mazus-miquelii_improve/assets/124840282/1a0cf851-7f4b-406f-9c65-fab4884c8db1)
+
+
+```{r, fig.height = 8,fig.with = 6}
 # the speed/proportion of each movement stage 
 data$begin<-data$onethird_movement/data$total_frame
 data$mid<-data$twothird_movement/data$total_frame
@@ -57,50 +93,99 @@ library(cluster)
 mcluster <- kmeans(data[,c(5,9)], center=3)
 clusplot(data, mcluster$cluster, color=T, shade=T, labels=0, lines=0)
 data$cluster1<-mcluster$cluster
-ggplot(data,aes(total_frame,length.of.petal.0.1mm., group=cluster1,colour = cluster1)) +geom_point(colour=data$cluster1,size=3)
-```
-![cluster1](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/d3087bb4-8886-4ad4-8ae7-3199f8a563d2)
-![ggplotcolor](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/f1d031ca-a8fd-4f08-995b-994f3716bf5e)
+
 
 ```
-# clustering by each movement stage (method 2)
-mcluster2 <- kmeans(data[,10:12], center=3)
+![3L@}E_{T0KAS F_E5F`5(5D](https://github.com/shenyuan27/PSY6422_220241465_Mazus-miquelii_improve/assets/124840282/0dce65d8-45a5-4336-b054-892ca291f0dc)
+
+
+```{r, fig.height = 8,fig.with = 6}
+
+ggplot(data,aes(total_frame,length.of.petal.0.1mm., group=cluster1,colour = cluster1)) +geom_point(colour=data$cluster1,size=3)+
+    labs(title = "Scatter plot of petal length and stigma closure time based on cluster analysis", x = "stigma closing time(frames)", y = "petal length")
+
+
+```
+![PC3T(NB`92_1S9{)1K0WYTE](https://github.com/shenyuan27/PSY6422_220241465_Mazus-miquelii_improve/assets/124840282/d2b64458-090c-4ffa-8019-36c4b7b9a49d)
+
+
+
+
+```{r, fig.height = 8,fig.with = 6}
+
+correlation <- cor(data$inflorescence_position_p, data$total_frame)
+
+cat("Pearson correlation between inflorescence position and stigma closure time:", correlation, "\n")
+
+correlation <- cor(data$length.of.petal.0.1mm., data$total_frame)
+
+cat("Pearson correlation between petal width and stigma closure time:", correlation, "\n")
+
+```
+
+```
+Pearson correlation between inflorescence position and stigma closure time: 0.268913 
+Pearson correlation between petal width and stigma closure time: -0.2166247 
+```
+
+It can be found that there is a weak positive correlation between the stigma closing time and the position of the inflorescence, that is, the closer to the bottom of the inflorescence, the longer the closing time; and there is a weak negative correlation with the petal width, the smaller the petal, the shorter the closing time.
+
+### 2.3 Classify the movement patterns of stigma closure
+
+
+```{r, fig.height = 8,fig.with = 6}
+
+mcluster2 <- kmeans(data[,13:15], center=3)
 clusplot(data, mcluster2$cluster, color=T, shade=T, labels=0, lines=0)
 data$cluster2<-mcluster2$cluster
-```
-![cluster2](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/a15a02bc-9518-4186-9b8f-b66f8f62404e)
 
 ```
-ggplot(data,aes(total_frame,cluster2, group=cluster1,colour = cluster1)) +geom_point(colour=data$cluster2,size=3)
-ggplot(data,aes(length.of.petal.0.1mm.,cluster2, group=cluster1,colour = cluster1)) +geom_point(colour=data$cluster2,size=3)
-```
-![lengthcluster2](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/e26a7d1e-f74e-42f5-9c6a-8602ab8383aa)
-![framecluster2](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/9f717f1a-a19b-4c4c-88cb-116ac01632b4)
-
-### Graph by movement type (method 2)
-```
-ggplot(data,aes(onethird_movement,twothird_movement, group=cluster2,colour = cluster2)) +geom_point(colour=data$cluster1,size=2)+geom_smooth(method = "loess",se = FALSE)
-ggplot(data,aes(onethird_movement,lastthird_movement, group=cluster2,colour = cluster2)) +geom_point(colour=data$cluster2,size=2)+geom_smooth(method = "loess",se = FALSE)
-```
-![两类方法作图，点颜色花冠总时间，线颜色运动特征](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/e531155a-4232-4f1e-bc55-2ad4884b9c3a)
-![两类方法作图3](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/a8f9d6ed-3927-4470-97af-9ed3b5b187e8)
 
 
 
-### analysis with inflorescence
+```{r, fig.height = 8,fig.with = 6}
+
+library(rgl)
+plot3d(data$onethird_movement, data$twothird_movement, data$lastthird_movement, type = "s", col = "blue", size = 3,xlab ="onethird_movement", 
+       ylab = "twothird_movement", zlab = "lastthird_movement")
+
+play3d(spin3d(axis = c(0.5,0.5,0.5), rpm = 4),duration = 100)
+
 ```
-data$inflorescence_total<-data$inflorescence_close+data$inflorescence_open+data$inflorescence_shedding
-data$inflorescence_position<-data$inflorescence_total-data$inflorescence_close
-ggplot(data,aes(total_frame,inflorescence_total)) +geom_point(colour=data$cluster2,size=2)
-ggplot(data,aes(total_frame,inflorescence_position)) +geom_point(colour=data$cluster2,size=2)
-```
-![infograph](https://github.com/shenyuan27/PSY6422YitongYang_Mazus-miquelii/assets/124840282/c127bc16-827f-44dd-9ffd-65d0b5d146e6)
+![3](https://github.com/shenyuan27/PSY6422_220241465_Mazus-miquelii_improve/assets/124840282/f93805fb-8cea-41b8-aa1d-aa859283d476)
 
 
-## Conclusion
+
+```{r, fig.height = 8,fig.with = 6}
+data$cluster2<-as.character(data$cluster2)
+
+ggplot(data,aes(onethird_movement,lastthird_movement, group=cluster2,colour = cluster2)) +geom_point(colour=data$cluster2,size=2)+geom_smooth(method = "loess",se = FALSE) +
+  scale_color_manual(values = c("1" = "blue", "2" = "cyan","3" = "purple"))
+
+```
+![PSY1](https://github.com/shenyuan27/PSY6422_220241465_Mazus-miquelii_improve/assets/124840282/b37be078-95e3-4102-89af-e8b42540dbde)
+
+
+In this experiment, the time spent in the front, middle, and back segments of each stigma closure was also counted; described here as onethird_movement, twothird_movement, and lastthird_movement. It can be observed in the three-dimensional scatter plot that, just like the total time, there are large differences in the movement patterns in different samples. Here, through cluster analysis, the movement patterns are divided into three categories, which can be described as fast first and then slow (onethird_movement value is small), moderate speed, slow first and then fast (onethird_movement value is large). It also shows that three motion patterns exist regardless of whether the total time is long or short.
+
+```{r, fig.height = 8,fig.with = 6}
+
+ggplot(data,aes(inflorescence_position_p, length.of.petal.0.1mm., group=cluster2,colour = cluster2)) +geom_point(colour=data$cluster2,size=3)+labs(title = "Scatter plot of petal length and inflorescence position", x = "inflorescence position", y = "petal length")
+
+```
+![UG VHWV5L}N 8HQ}(FXQ(QA](https://github.com/shenyuan27/PSY6422_220241465_Mazus-miquelii_improve/assets/124840282/ac81b265-5eb1-4766-9c8b-89af6c7c69be)
+
+
+Unfortunately, the movement pattern of stigma closure does not appear to be clearly related to inflorescence position and petal width.But this may be related to ecological adaptation strategies, such as the existence of deliberately random genotypes, which requires more research to explain.
+
+
+## 3.Conclusion
 According to clustering method 2, it can be observed that the stigma of mazus miquelli may have significantly different movement patterns in different individuals, and this pattern has no obvious relationship with the total movement time or corolla length.
 From the analysis of the combination of inflorescence and movement characteristics, the total movement time of the inflorescence with less flowering (this is related to the plant microenvironment such as sunlight, water, insect pests, etc., and may also be related to genotype) is shorter. From the perspective of experimental improvement, flowering time and inflorescence growth time can be included in the records to obtain more convincing evidence on the ecological significance and adaptability of stigma behavior to plants.
 
 ## Reference
 1.Stigma Sensitivity and the Duration of Temporary Closure Are Affected by Pollinator Identity in Mazus miquelii (Phrymaceae), a Species with Bilobed Stigma. Front. Plant Sci., 10 May 2017 Sec. Plant Development and EvoDevo Volume 8 - 2017 | https://doi.org/10.3389/fpls.2017.00783
 2.K-means clustering Cristian Ramos Lorenzo https://rpubs.com/MrCristianrl/504935
+
+
+
